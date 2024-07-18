@@ -1,0 +1,328 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Dokumentasi | Peminjaman buku - Backend Test",
+        "description": "Dokumentasi API untuk manajemen Peminjaman buku - Backend Test",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Show Books",
+                "description": "Showing books list",
+                "operationId": "getBooks",
+                "responses": {
+                    "200": {
+                        "description": "Success show books list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Books"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/members": {
+            "get": {
+                "tags": [
+                    "Members"
+                ],
+                "summary": "Show Members",
+                "description": "Showing members list",
+                "operationId": "getMembers",
+                "responses": {
+                    "200": {
+                        "description": "Success show members list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Members"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/peminjaman": {
+            "post": {
+                "tags": [
+                    "Peminjaman"
+                ],
+                "summary": "Peminjaman Buku",
+                "description": "Peminjaman Buku",
+                "operationId": "borrowBooks",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "member_id",
+                                    "book_id"
+                                ],
+                                "properties": {
+                                    "member_id": {
+                                        "description": "member id",
+                                        "type": "integer"
+                                    },
+                                    "borrow_id": {
+                                        "description": "borrow id",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success borrowing book",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "borrow id",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "error validation",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Peminjaman"
+                ],
+                "summary": "Return Book",
+                "description": "Returning Book",
+                "operationId": "returnBooks",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "borrow_id"
+                                ],
+                                "properties": {
+                                    "borrow_id": {
+                                        "description": "borrow id",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success returning book",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "borrow id",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "error validation",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Books": {
+                "title": "Books",
+                "description": "Model Books",
+                "required": [
+                    "name",
+                    "title",
+                    "author",
+                    "stock"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Book id",
+                        "type": "integer"
+                    },
+                    "code": {
+                        "description": "Book code",
+                        "type": "string"
+                    },
+                    "title": {
+                        "description": "Book title",
+                        "type": "string"
+                    },
+                    "author": {
+                        "description": "Book author",
+                        "type": "string"
+                    },
+                    "stock": {
+                        "description": "Book stock",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "description": "Tanggal pertama kali dibuat",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Tanggal terakhir ubah",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Members": {
+                "title": "Members",
+                "description": "Model Members",
+                "required": [
+                    "code",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Member id",
+                        "type": "integer"
+                    },
+                    "code": {
+                        "description": "Member code",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Member Name",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Tanggal pertama kali dibuat",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Tanggal terakhir ubah",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Peminjaman": {
+                "title": "Peminjaman",
+                "description": "Model Peminjaman",
+                "required": [
+                    "member_id",
+                    "book_id",
+                    "returned_at"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "borrow id",
+                        "type": "integer"
+                    },
+                    "member id": {
+                        "description": "member id",
+                        "type": "string"
+                    },
+                    "book_id": {
+                        "description": "Book id",
+                        "type": "integer"
+                    },
+                    "returned_at": {
+                        "description": "Tanggal dikembalikan",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "created_at": {
+                        "description": "Tanggal pertama kali dibuat",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Tanggal terakhir ubah",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Books",
+            "description": "Books"
+        },
+        {
+            "name": "Members",
+            "description": "Members"
+        },
+        {
+            "name": "Peminjaman",
+            "description": "Peminjaman"
+        }
+    ]
+}

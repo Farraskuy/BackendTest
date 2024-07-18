@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritma | Reverse</title>
+</head>
+
+<body>
+    <p>Input: NEGIE1</p>
+    <p>Result: <span id="result"></span></p>
+    <script>
+        const input = 'NEGIE1';
+        let output = '';
+        const resultElement = document.getElementById('result');
+
+        let huruf = input.match(/([a-z]+)/i)[0];
+        let angka = input.match(/([1-9]+)/)[0];
+
+        huruf = huruf.split('').map((val, index) => {
+            return huruf[huruf.length - (index + 1)];
+        });
+
+        output = huruf.join('') + angka
+
+        console.log('input: ' + input, 'output: ' + output);
+        resultElement.textContent = output
+    </script>
+</body>
+
+</html>

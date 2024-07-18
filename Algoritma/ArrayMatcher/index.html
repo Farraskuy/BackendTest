@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritma | Array Matcher</title>
+</head>
+
+<body>
+    <p>Input: ['xc', 'dz', 'bbb', 'dz']</p>
+    <p>Query: ['bbb', 'ac', 'dz']</p>
+    <p>Result: <span id="result"></span></p>
+    <script>
+        const input = ['xc', 'dz', 'bbb', 'dz']
+        const query = ['bbb', 'ac', 'dz']
+        let output = [];
+        const resultElement = document.getElementById('result');
+
+        query.forEach((item) => {
+            let result = input.filter((search) => {
+                return item == search
+            })
+            output.push(result.length);
+        });
+
+        console.log('input: ' + input, 'output: ' + output);
+        resultElement.textContent = output
+    </script>
+</body>
+
+</html>

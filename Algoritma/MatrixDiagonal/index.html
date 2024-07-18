@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritma | Selisih penjumlahan matrix diagonal</title>
+</head>
+
+<body>
+    <p>Input:
+        <br>
+        [1, 2, 0],
+        <br>
+        [4, 5, 6],
+        <br>
+        [7, 8, 9]
+    </p>
+    <p>Result: <span id="result"></span></p>
+    <script>
+        const input = [
+            [1, 2, 0],
+            [4, 5, 6],
+            [7, 8, 9]
+        ];
+        let output = 0;
+        const resultElement = document.getElementById('result');
+
+        for (let i = 0; i < input.length; i++) {
+            output += input[i][i] - input[i][input.length - 1 - i];
+        }
+
+        console.log('input: ' + input, 'output: ' + output);
+        resultElement.textContent = output
+    </script>
+</body>
+
+</html>

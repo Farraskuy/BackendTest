@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritma | Word Count</title>
+</head>
+
+<body>
+    <p>Input: Saya sangat senang mengerjakan soal algoritma</p>
+    <p>Result: <span id="result"></span></p>
+    <script>
+        const input = 'Saya sangat senang mengerjakan soal algoritma';
+        let output = '';
+        const resultElement = document.getElementById('result');
+
+        output = input.split(' ').length
+        
+        console.log('input: ' + input, 'output: ' + output);
+        resultElement.textContent = output
+    </script>
+</body>
+
+</html>
